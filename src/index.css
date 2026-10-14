@@ -1,0 +1,241 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --surface-bg: #f8fafc;
+    --surface-card: rgba(255, 255, 255, 0.85);
+    --surface-border: rgba(226, 232, 240, 0.85);
+  }
+
+  .dark {
+    --surface-bg: #090b10;
+    --surface-card: rgba(13, 17, 24, 0.78);
+    --surface-border: rgba(255, 255, 255, 0.08);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background-color: #f8fafc;
+  }
+
+  .dark body {
+    background-color: #090b10;
+  }
+
+  .font-mono, [class*="font-mono"] {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Industrial Grid Background */
+.industrial-grid-bg {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.12) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.dark .industrial-grid-bg {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Glassmorphism System */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+}
+
+.dark .glass-panel {
+  background: rgba(11, 15, 23, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.7);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03), 0 1px 2px -1px rgba(0, 0, 0, 0.02);
+}
+
+.dark .glass-card {
+  background: rgba(13, 17, 24, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
+}
+
+.glass-card-hover {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-1px);
+  border-color: rgba(245, 158, 11, 0.4);
+  box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Distinctive Industrial Accent Cards */
+.glass-card-amber {
+  background: rgba(254, 243, 199, 0.35);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+.dark .glass-card-amber {
+  background: rgba(245, 158, 11, 0.06);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(245, 158, 11, 0.18);
+  box-shadow: inset 0 1px 0 0 rgba(245, 158, 11, 0.12);
+}
+
+.glass-card-rose {
+  background: rgba(255, 241, 242, 0.4);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(244, 63, 94, 0.25);
+}
+.dark .glass-card-rose {
+  background: rgba(244, 63, 94, 0.06);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  box-shadow: inset 0 1px 0 0 rgba(244, 63, 94, 0.1);
+}
+
+.glass-card-emerald {
+  background: rgba(236, 253, 245, 0.4);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+.dark .glass-card-emerald {
+  background: rgba(16, 185, 129, 0.06);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: inset 0 1px 0 0 rgba(16, 185, 129, 0.1);
+}
+
+/* Industrial Typography & Component Accents */
+.industrial-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.industrial-metric {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+/* Crisp Industrial Micro-Badges (Zero-Pill discipline) */
+.industrial-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 3px;
+  border-width: 1px;
+  line-height: 1.2;
+}
+
+/* Coordinated Badge Variants (Important & Non-Important) */
+.industrial-badge-rose {
+  background: rgba(244, 63, 94, 0.1);
+  color: #be123c;
+  border-color: rgba(244, 63, 94, 0.3);
+}
+.dark .industrial-badge-rose {
+  background: rgba(244, 63, 94, 0.12);
+  color: #fda4af;
+  border-color: rgba(244, 63, 94, 0.3);
+}
+
+.industrial-badge-amber {
+  background: rgba(245, 158, 11, 0.1);
+  color: #b45309;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+.dark .industrial-badge-amber {
+  background: rgba(245, 158, 11, 0.12);
+  color: #fcd34d;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.industrial-badge-emerald {
+  background: rgba(16, 185, 129, 0.1);
+  color: #047857;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+.dark .industrial-badge-emerald {
+  background: rgba(16, 185, 129, 0.12);
+  color: #6ee7b7;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+/* Non-Important / Routine / Baseline Badges - harmonized with the core palette */
+.industrial-badge-slate {
+  background: rgba(100, 116, 139, 0.1);
+  color: #334155;
+  border-color: rgba(100, 116, 139, 0.28);
+}
+.dark .industrial-badge-slate {
+  background: rgba(148, 163, 184, 0.1);
+  color: #cbd5e1;
+  border-color: rgba(148, 163, 184, 0.22);
+}
+
+.glass-card-slate {
+  background: rgba(241, 245, 249, 0.5);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+.dark .glass-card-slate {
+  background: rgba(100, 116, 139, 0.05);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.03);
+}
+
+/* Custom scrollbar for high-density tables */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(140, 140, 140, 0.25);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(140, 140, 140, 0.45);
+}
+
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}
