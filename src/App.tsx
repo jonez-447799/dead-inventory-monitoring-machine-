@@ -41,6 +41,12 @@ import { CommercialMonetizationHub } from './components/CommercialMonetizationHu
 import { RDTestLabHub } from './components/RDTestLabHub';
 import { ClientWorkspace, AppTab, WhiteLabelProfile } from './types';
 import { generateOwnerReport } from './utils/calculations';
+import { 
+  testConnection, 
+  loadWorkspacesFromFirestore, 
+  saveWorkspaceToFirestore, 
+  saveAuditLogToFirestore 
+} from './lib/firebase';
 
 // Baseline multi-client workspaces for consulting demonstration
 const INITIAL_WORKSPACES: ClientWorkspace[] = [
@@ -324,6 +330,41 @@ export default function App() {
     }
   }, [auditLogs]);
 
+  // Test connection & load persistent cloud data from Firestore
+  useEffect(() => {
+    testConnection();
+
+    loadWorkspacesFromFirestore().then((cloudWorkspaces) => {
+      if (cloudWorkspaces && cloudWorkspaces.length > 0) {
+        setWorkspaces(cloudWorkspaces);
+        const currentActive = cloudWorkspaces.find((w) => w.id === activeWorkspaceId) || cloudWorkspaces[0];
+        if (currentActive) {
+          setActiveWorkspaceId(currentActive.id);
+          if (currentActive.items && currentActive.items.length > 0) {
+            setItems(currentActive.items);
+          }
+          if (currentActive.rules) {
+            setRules(currentActive.rules);
+          }
+        }
+      } else {
+        // Seed initial workspaces to cloud
+        workspaces.forEach((ws) => {
+          saveWorkspaceToFirestore(ws);
+        });
+      }
+    }).catch((err) => {
+      console.warn('Initial cloud fetch:', err);
+    });
+  }, []);
+
+  // Persist active workspace to Firestore on change
+  useEffect(() => {
+    if (activeWorkspace) {
+      saveWorkspaceToFirestore(activeWorkspace);
+    }
+  }, [activeWorkspace]);
+
   // Append audit helper
   const logAction = (action: string, details: string) => {
     const newLog = createAuditLog(
@@ -333,6 +374,7 @@ export default function App() {
       details
     );
     setAuditLogs((prev) => [newLog, ...prev.slice(0, 99)]);
+    saveAuditLogToFirestore(newLog);
   };
 
   // Item update handler

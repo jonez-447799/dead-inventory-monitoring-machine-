@@ -1,0 +1,82 @@
+{
+  "entities": {
+    "StockItem": {
+      "title": "StockItem",
+      "description": "Inventory stock item record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "itemCode": { "type": "string" },
+        "itemName": { "type": "string" },
+        "category": { "type": "string" },
+        "qtyOnHand": { "type": "number" },
+        "costRate": { "type": "number" },
+        "lastMovement": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "itemCode", "itemName", "category", "qtyOnHand", "costRate", "lastMovement"]
+    },
+    "ClientWorkspace": {
+      "title": "ClientWorkspace",
+      "description": "Client factory workspace metadata",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "clientName": { "type": "string" },
+        "industry": { "type": "string" },
+        "location": { "type": "string" },
+        "contactPerson": { "type": "string" },
+        "contactPhone": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "clientName", "industry", "createdAt"]
+    },
+    "SystemRule": {
+      "title": "SystemRule",
+      "description": "Dead stock and ageing evaluation parameters",
+      "type": "object",
+      "properties": {
+        "asOfDate": { "type": "string" },
+        "deadThresholdDays": { "type": "number" },
+        "slowThresholdDays": { "type": "number" },
+        "classACutoff": { "type": "number" },
+        "classBCutoff": { "type": "number" },
+        "holdingCostPercent": { "type": "number" }
+      },
+      "required": ["asOfDate", "deadThresholdDays", "slowThresholdDays", "classACutoff", "classBCutoff", "holdingCostPercent"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "System audit and compliance trail",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "user": { "type": "string" },
+        "role": { "type": "string" },
+        "action": { "type": "string" },
+        "details": { "type": "string" }
+      },
+      "required": ["id", "timestamp", "user", "action"]
+    }
+  },
+  "firestore": {
+    "/workspaces/{workspaceId}": {
+      "schema": "ClientWorkspace",
+      "description": "Client industrial workspace settings"
+    },
+    "/workspaces/{workspaceId}/items/{itemId}": {
+      "schema": "StockItem",
+      "description": "Inventory items within a factory workspace"
+    },
+    "/workspaces/{workspaceId}/rules/{ruleId}": {
+      "schema": "SystemRule",
+      "description": "Working capital evaluation rules per workspace"
+    },
+    "/auditLogs/{logId}": {
+      "schema": "AuditLog",
+      "description": "Audit trail log records"
+    }
+  }
+}

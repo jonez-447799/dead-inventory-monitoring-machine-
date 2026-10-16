@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Health check endpoint for test connection
+    match /test/{testId} {
+      allow read, write: if true;
+    }
+
+    // Factory client workspaces
+    match /workspaces/{workspaceId} {
+      allow read, write: if true;
+
+      // Inventory items in workspace
+      match /items/{itemId} {
+        allow read, write: if true;
+      }
+
+      // Rules config in workspace
+      match /rules/{ruleId} {
+        allow read, write: if true;
+      }
+    }
+
+    // Audit trail logs
+    match /auditLogs/{logId} {
+      allow read, write: if true;
+    }
+  }
+}
